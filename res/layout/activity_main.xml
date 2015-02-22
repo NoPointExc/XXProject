@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.xxproject.MainActivity" >
+
+    <TextView
+        android:id="@+id/textview_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Disconnected" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/textview_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Unknown IP" >
+    </TextView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchbtClicked"
+        android:text="Launch" >
+    </Button>
+
+    <!-- Tempture Zone -->
+
+    <TextView
+        android:id="@+id/textview_temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="Tempturel"
+        android:textColor="#666699" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:text="28" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onTempAdd"
+            android:text="+" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onTempDec"
+            android:text="-" />
+    </LinearLayout>
+
+    <!-- LED Zone -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="LED Control"
+        android:textColor="#666699" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <!-- #009966 绿， 代表开 。#CC0033 红，代表关 -->
+
+        <Button
+            android:id="@+id/button_LED1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CC0033"
+            android:onClick="onLEDButtonClicked"
+            android:text="LED 1" />
+
+        <Button
+            android:id="@+id/button_LED2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CC0033"
+            android:onClick="onLEDButtonClicked"
+            android:text="LED 2" />
+    </LinearLayout>
+
+</LinearLayout>
