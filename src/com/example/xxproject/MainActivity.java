@@ -53,8 +53,10 @@ public class MainActivity extends Activity {
 	private final int IO_EXCEPTION = 1;
 	private final int ON_RECEIVED = 2;
 
-	private Tcp mTcp;
-	private TcpThread mTcpThread;
+	//private Tcp mTcp;
+	private TcpClient mTcpClient;
+	//private TcpThread mTcpThread;
+	private TcpClientThread mTcpClientThread;
 	private static Handler mHandler;
 
 	@Override
@@ -202,16 +204,16 @@ public class MainActivity extends Activity {
 		try {
 			switch (view.getId()) {
 			case R.id.button_LED1:
-				if (mTcp != null && mTcp.getOutputStream() != null) {
+				if (mTcpClient != null && mTcpClient.getOutputStream() != null) {
 
 					if (LED1On) {
 						// turn off LED1
-						mTcp.write("L2");
+						mTcpClient.write("L2");
 						LED1On = false;
 						mButton1.setBackgroundColor(Color.parseColor("#CC0033"));// red
 					} else {
 						// turn on LED1
-						mTcp.write("L1");
+						mTcpClient.write("L1");
 						LED1On = true;
 						mButton1.setBackgroundColor(Color.parseColor("#009966"));// green
 					}
@@ -220,16 +222,16 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.button_LED2:
 
-				if (mTcp != null && mTcp.getOutputStream() != null) {
+				if (mTcpClient != null && mTcpClient.getOutputStream() != null) {
 
 					if (LED2On) {
 						// turn off LED2
-						mTcp.write("L4");
+						mTcpClient.write("L4");
 						LED2On = false;
 						mButton2.setBackgroundColor(Color.parseColor("#CC0033"));// red
 					} else {
 						// turn on LED2
-						mTcp.write("L3");
+						mTcpClient.write("L3");
 						LED1On = true;
 						mButton2.setBackgroundColor(Color.parseColor("#009966"));// green
 					}
@@ -250,7 +252,7 @@ public class MainActivity extends Activity {
 	 * @param view
 	 */
 	public void onTempAdd(View view) {
-		if (mTcp != null && mTcp.getOutputStream() != null) {
+		if (mTcpClient != null && mTcpClient.getOutputStream() != null) {
 			try {
 				String tempString = mTempTextView.getText().toString();
 				int tempInt = Integer.parseInt(tempString);
@@ -259,7 +261,7 @@ public class MainActivity extends Activity {
 				}
 				tempString = String.valueOf(tempInt);
 				mTempTextView.setText(tempString);
-				mTcp.write(tempString);
+				mTcpClient.write(tempString);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -272,7 +274,7 @@ public class MainActivity extends Activity {
 	 * @param view
 	 */
 	public void onTempDec(View view) {
-		if (mTcp != null && mTcp.getOutputStream() != null) {
+		if (mTcpClient != null && mTcpClient.getOutputStream() != null) {
 			try {
 				String tempString = mTempTextView.getText().toString();
 				int tempInt = Integer.parseInt(tempString);
@@ -281,7 +283,7 @@ public class MainActivity extends Activity {
 				}
 				tempString = String.valueOf(tempInt);
 				mTempTextView.setText(tempString);
-				mTcp.write(tempString);
+				mTcpClient.write(tempString);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -333,9 +335,12 @@ public class MainActivity extends Activity {
 	private void connect(String password) {
 
 		try {
-			mTcp = new Tcp(PORT, password);
-			mTcpThread = new TcpThread(mTcp, mHandler);
-			mTcpThread.start();
+			//mTcp = new Tcp(PORT, password);
+			//mTcpThread = new TcpThread(mTcpClient, mHandler);
+			mTcpClient=new TcpClient(PORT, password);
+			mTcpClientThread=new TcpClientThread(mTcpClient, mHandler);
+			//mTcpThread.start();
+			mTcpClientThread.start();
 		} catch (IOException e) {
 			//
 			e.printStackTrace();

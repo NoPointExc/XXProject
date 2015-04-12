@@ -1,5 +1,7 @@
 package com.example.xxproject;
-
+/**
+ * 在Server设计下使用，在你的设计中没用
+ */
 import java.io.IOException;
 
 import android.R.integer;
